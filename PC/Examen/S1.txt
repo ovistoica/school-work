@@ -1,0 +1,68 @@
+1.a)protocolul RTP
+b) Comparatie RTP,UDP,TCP(din p.d.v al erorilor parca)
+c)paradigma client-server
+d)servicii transport neorientate vs servicii de confirmare
+e)corectitudinea TCP
+
+2. a) de ce sunt necesare ceasurile si numerele de Secventa
+b) transmisie transparenta
+c)o chestie cu inserare de biti.....cu cum o sa arate sirul dupa inserare
+3.1 DNS
+3.2 HTTP
+
+1.a)Protocolul RTP
+Real time transfer protocol!!!!!!!!!
+Este un protocol de trasnfer.
+Prin intermediul rtp se pot prelucra date multimedia.
+Este un protocol nesigur,nu asigura corectitudinea datelor.
+Functia sa principala este de  multiplexare a fluxurilor RTP in fluxuri UDP.
+Pozitia sa:
+-multimedia
+-RTP
+-socket api
+-udp
+-ip
+-ethernet
+Formatul unui mesaj rp:ethernet-ip-udp-rtp(cu payloaduri fiecare)
+
+b)udp si rtp nu asigura corectitudinea datelor,asa ca au aceleasi erori(duplicate,modificate,pierdute).
+Tcp sigur asa ca are alt tip de erori decat protocoalele fara conexiune.
+
+d)Serviciile de transport neorientate:
+  Serverul:deschide un socket(socket)->asculta la o adresa->primeste/trimite mesaje->inchide trimitere/primirea/inchide socketul
+  Clientul:Creaza un socket,trimite/primeste,se opreste din trimitere/primire,inchide socketul
+Servicii de transport de confirmare:
+  Serverul:Creaza socket,asculta la o adresa,Stab nr maxim de cereri pe care le poate avea(listen),
+accepta,repetat,cate o cerere-accept,repetat-primeste date recv
+  Clientul:creaza socket,se conecteaza la server,trimite date,elibereaza resursele conexiunii,informeaza serverul despre inchiderea conexiunii.
+e)TCP e un protocol sigur,datele ajung corect,nealterate,in ordine.
+
+2.a)Ceasurile sunt necesare pentru ca ,confirmarea se poate pierde sau chiar pachetul.
+Asa ca ceasul stabileste o perioada de timp suficient de lunga pt trimitere,prelucrare si confirmare.Daca in acest timp,inainte de expirare,nu se primeste confirmarea de primire,atunci pachetul e retrimis.
+Numerele de secventa sunt necesare pentru evitarea duplicarii unui mesaj.Fiecae pachet are un numar de secventa iar receptorul se uita la nr de secventa sa stie daca mai are pachetul rspectiv sau nu.
+
+b)Trasnmisia transparenta este o tehnica in care avem niste secvente speciale la inceputul si sfarsitul datelor trimise.
+STX se pune la inceput ,marcand inceputul mesajului,si ETX la sfarsit.
+Pot aparea 2 probleme:
+1:La trimiterea datelor(binare),datele pot contine secvente identice cu secventele speciale.
+  Rezolvare:In loc de STX si Etx vom pune.DLE STX si DLE ETX,si le definim la inceputul si sfarsitul.
+2.Unelee date contin flag fals de terminare.
+  Rezolvare:La trimitere,punem un 0 dupa 5 biti consecutivi de 1.
+            La primire,eliminam 0 care e dupa 5 biti consecutivi de 1.
+
+c)
+
+3.1 DNS
+Domain Name system este un sistem ce face traducerea intre nume simbolice si adrese ip.
+Pentru a stabili corespondenta dintre nume si adresa ip,programul de aplicatie apeleaza o procedura de biblioteca,numita resolver care trimite un pachet UDP la serverul DNS local,
+care cauta numele si returneaza adresa ip catre resolver,care o returneaza apelantului.
+DNS are 3 mari componente:
+-Spatiul de nume
+-Servere DNS
+-Resolvere
+Spatiul de nume e organizat ierarhic.In fiecare nod este tinut cate un set de informatii.
+Informatiile sunt pastrate in baze de date DNS.
+Inregistrarile de resurse specifica:numele resursei si adresa ip,info de configurare bd dns,altele.
+Serverele DNS administreaza zone DNS si pastreaza info pt unul sau mai multe domenii.
+
+

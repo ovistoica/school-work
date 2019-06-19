@@ -1,0 +1,11 @@
+I.
+xs, ys => yss (derivatele in fiecare punct) 
+Xs = [0.1, 0.15, 0.5, 0.501, 0.9, 1.2];
+ys = sin(xs);
+afisati yss / cos(xs)
+
+II.
+xs, ys => [At, As]
+xs = linspace(-10, 10, 39);
+ys = 2 * xs .^2 - xs + 1
+Aflati At, As si comp cu 1335, 33

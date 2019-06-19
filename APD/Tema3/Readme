@@ -1,0 +1,16 @@
+Stoica George-Ovidiu
+Grupa: 332CA
+Tema 3 APD
+
+
+Procesul 0 citeste matricea imaginii din fisier si trimite fiecarui proces
+liniile pe care acesta trebuie sa aplice filtrul.
+
+Dupa aplicarea unui filtru, procesele isi sincronizeaza prima si ultima linie cu
+procesele rank +- 1.
+
+Formule pentru aflarea liniilor pentru fiecare proces:
+low = rank * inaltime_imagine / nr_procese;
+high = (rank + 1) * inaltime_imagine / nr_procese - 1;
+
+

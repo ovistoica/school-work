@@ -1,0 +1,1 @@
+La examen a zis Tapus ca nu stie de unde am invatat sa rezolvam asa tipul asta de probleme, dar ca e gresit

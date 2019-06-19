@@ -1,0 +1,55 @@
+Node din această dizertație:
+http://idav.ucdavis.edu/~dfalcant/downloads/dissertation.pdf
+
+*St = 1.25 N pentru cele mai bune performanțe coliziune - spațiu
+
+*Quadratic: h(k) =g(k) +c0·iteration+c1·iteration^2
+cu c0 = 0 și c1 = 1;
+
+* Double probing
+h(k) =g(k) +jump(k)·iteration
+unde jump este altă funcție de hash
+jump(k)  =  1 + (k mod jumpprime) unde jumpprime = 41
+
+*Pentru probing, numărul de iterații să fie mai mic decât N sau 10000
+Dacă s-a trecut de acest număr atunci a dat fail și se încearcă un alt hash sau
+altă funcție de hash
+
+HASH FUNCTION:
+g(k) = (f(a, k) +b) mod p mod ST
+Unde a și b sunt numere generate random
+Dacă f(a,k) este a XOR k, rezultatele sunt destul de bine distribuite pentru
+valori pe 32 de biți
+
+Random generator folosit: Mersenne Twister with improved initialization
+link: http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
+
+Pentru a minimiza numărul de blocuri ținute în viață de un singur thread, facem
+blocurile de 64 de thread-uri;
+
+
+
+ALGORITM:
+allocate enough memory for table[ ], which will contain ST 64-bit slots
+2:repeat
+3:	fill each slot with∅
+4:	generate a new hash function for the current attempt
+5:	for allkey-value pairs (k, v) in the inputdo
+6:		repeat
+7:			atomically check-and-settable[location]
+8:			advance location to next location in probe sequence
+9:		until ∅ is found or max probes hit
+10:	end for
+11:untilhash table is built
+
+
+
+
+
+
+
+
+Varianta cu Chaining
+
+B = numărul de buckets
+B = 0.5 N

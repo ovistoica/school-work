@@ -1,0 +1,29 @@
+Facultatea: Automatica si Calculatoare
+Sectia: Calculatoarea
+Grupa 322CA
+Echipa: 
+	-BB Bucurie-
+	Birzan Andrei
+	Codreanu Bogdan
+	Fainarea Maria
+	Stoica Ovidiu
+
+	Strategia de joc implementata pentru aceasta etapa a constat in a parcurge
+ multimea de nave si in a folosi un PriorityQueue care sorteaza planetele in functie
+ de distanta lor fata de nava curenta. Asa am obtinut cea mai apropiata planeta la care
+nava poate merge sa o colonizeze. Aceasta metoda este eficienta din cauza structurii
+de date care face sortare in O( n log n) ducand la reducerea timpului de executie si a
+capacitatii de extragere a elementului cel mai bun in O(1).
+	Sursa de inspiratia a fost experienta noastra in ceea ce priveste utilizarea
+structurilor de date pentru a optimiza anumite operatii.
+	Prima etapa a proiectului a fost facuta print-o colaborare continua a
+membrilor echipei fapt care a dus la intrepatrunderea rolurilor propuse in inceput. 
+Am gandit impreuna strategia si tot impreuna ne-am implementat ideile intalnindu-ne 
+fata in fata pentru a intelege si a rezolva prima parte din acest proiect. Toata echipa
+s-a intalnit in Precis si am dezvoltat proiectul impreuna.
+	Structura proiectului - In aceasta prima faza proiectul nu contine o impartire 
+pe functii a implementarii clasei MyBot.java ci totul se petrece in main. La o dezvoltare 
+ulterioara vom crea functii separate pentru a fi usor gestionat structura proiectului.
+
+
+

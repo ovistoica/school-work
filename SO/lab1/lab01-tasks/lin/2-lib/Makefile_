@@ -1,0 +1,23 @@
+CC = gcc                        # compilatorul folosit
+CFLAGS = -Wall -g               # optiunile pentru compilare
+ 
+all: main_static
+
+main_static: libhexdump_static.a main.o
+	$(CC) $(CFLAGS) -o main_static -lhexdump_static -L.
+
+libhexdump_static.a: sample.o hexdump.o
+	ar rc $@ $^
+hexdump.o: hexdump.c
+
+sample.o: sample.c
+
+main.o: main.c
+	
+# compileaza fisierul log.c in modulul obiect log.o
+log.o: log.c log.h
+ 
+.PHONY: clean
+ 
+clean:
+	rm -fr *~ *.o server client

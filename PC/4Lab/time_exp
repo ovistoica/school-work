@@ -1,0 +1,28 @@
+START-STOP: (DELAY=10 SPEED=20)
+real    0m13.310s
+user    0m0.022s
+sys 0m0.030s
+
+START-STOP: (SPEED=1 DELAY=100)
+real    2m4.662s
+user    0m0.014s
+sys 0m0.047s
+
+
+FEREASTRA-GLISANTA (SPEED=20 DELAY=10)
+real    0m3.294s
+user    0m0.018s
+sys 0m0.070s
+
+FEREASTRA-GLISANTA (SPEED=1 DELAY=100)
+real    0m24.725s
+user    0m0.020s
+sys 0m0.089s
+
+
+la FG depinde de produsul SPEED * DELAY (BDP)
+la SW depinde de numarul de pachete si cel mai mult de DELAY
+
+
+Daca window este folosit cu un numar mai mare decat cel calculat receiver-ul nu va avea timp sa le proceseze pe toate;
+

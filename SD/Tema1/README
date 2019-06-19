@@ -1,0 +1,56 @@
+Tema 1 Structuri de Date - Robot Planning
+NUME: Stoica George-Ovidiu
+GRUPA: 322CA
+
+    Clase si structuri folosite:
+        *Command: Structura pentru gestiunea si executia de comenzi
+        *Robot: Clasa folsita pentru Robot. Robot contine functii membru pentru
+                a executa comenzi din coada de comenzi.
+        *Deque: Container pentru comenzi.
+        *Stack: Stiva pentru istoricul de comenzi si LAST_EXECUTED_COMMAND.
+
+    Fiecare robot are comenzile stocate intr-un Deque, cu posibilitate de
+adaugare/stergere de la final si inceput.
+
+    UNDO:
+    Am folosit doua stive: History si executedCommands.
+Acestea stocheaza un tuplu de Command si ID (pentru robotul caruia i s-a dat
+comanda). Cand se da comanda UNDO, history scoate ultimul tuplu adaugat.
+Pentru comenzi de tip EXECUTE, se apeleaza undoCommand(Command c, int **map)
+din Robot.h care executa inversa comenzii executate.  Pentru comenzi de tipul ADD,
+acestea sunt scoase din lista de comenzi a robotului cu ID-ul respectiv.
+
+    ADD:
+    Comanda este citita si in functie de prioritate, este pusa la inceputul sau
+la finalul listei.
+
+    EXECUTE:
+    Robotul cu id-ul ID apeleaza executeCommand(). In caz ca nu are comenzi,
+returneaza o comanda cu tipul '0'. Pentru DROP in caz ca robotul contine mai
+putine cutii decat comanda, comanda primeste numarul de cutii al robotului,
+sau comanda primeste numarul de cutii din celula hartii in cazul ADD.
+
+    HOW_MUCH_TIME:
+    Fiecare comanda are un membru exTime, care este incrementat dupa fiecare
+comanda. Cand se primeste comanda se consulta exTime pentru ultima comanda din
+executedCommands.
+
+    LAST_EXECUTED_COMMAND:
+    Se consulta ultima comanda stocata in executedCommands.
+
+    PRINT_COMMANDS:
+    Am supraincarcat << pentru structura Command si printarea se face apeland
+functia printDeq din Deque care printeaza fiecare element din lista.
+
+    HOW_MANY_BOXES:
+    Se apeleaza getBoxes pentru robotul cu id-ul ID.
+
+    Pentru citire am folosit getline(file, string) si un stringstream din care
+citesc intr-o structura Command. 
+    Pentru scrierea in fisier am redirectat bufferul cout spre robot.out.
+
+    Am folosit enum string_command pentru ca nu poti folosi string-uri pentru
+case-urile unui switch-case si in acelasi timp mi se pare mai elegand asa.
+    Initial am vrut ca fiecare robot sa aiba un pointer spre harta data la
+inceputul programului dar nu mai stiu de ce nu  mi-a iesit, asa ca harta
+este data ca si argument pentru functiile care o modifica (EXECUTE si UNDO).

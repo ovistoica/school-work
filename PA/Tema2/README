@@ -1,0 +1,17 @@
+Stoica George-Ovidiu
+322CA
+Tema 2 Proiectarea Algoritmilor
+
+minlexbfs:
+    Am sortat crescator vecinii fiecarui nod si bfs afiseaza sortarea minim
+lexicografica.
+
+disjcnt:
+    Prima data elimin muchiile critice si apoi fac suma de (combinari nr_noduri
+luate cate 2) pentru fiecare componenta conexa.
+
+revedges:
+    Am folosit algoritmul Floyd-Warshall. In matrice am pus cand 0 cand x, y au
+muchie, 1 pentru muchia "inversa" in caz ca aceasta nu este definita de la input
+si INF in rest. Pentru adj[x][y] = c => Minim c muchii inversate pentru a avea
+drum intre x si y.

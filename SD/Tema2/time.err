@@ -1,0 +1,9 @@
+==5262== 2,400,000,008 bytes in 1 blocks are possibly lost in loss record 2 of 2
+==5262==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5262==    by 0x403525: Hashtable<unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Hashtable(unsigned int, unsigned int (*)(unsigned int)) (Hashtable.h:23)
+==5262==    by 0x4019B2: main (tema2.cpp:49)
+==5262== 
+
+real	0m58.470s
+user	0m57.834s
+sys	0m0.632s

@@ -1,0 +1,2 @@
+2 cores
+6 threads

@@ -1,0 +1,28 @@
+ctc_tarjan(G = (V, E))
+        index = 0
+        S = stiva vida
+        pentru fiecare v din V
+                daca (idx[v] nu e definit) // nu a fost vizitat
+                        tarjan(G, v)
+
+tarjan(G, v)
+        idx[v] = index
+        lowlink[v] = index
+        index = index + 1
+        push(S, v)
+
+        pentru (v, u) din E
+                daca (idx[u] nu e definit)
+                        tarjan(G, u)
+                        lowlink[v] = min(lowlink[v], lowlink[u])
+                altfel
+                        daca (u e in S)
+                                lowlink[v] = min(lowlink[v], idx[u])
+
+        daca (lowlink[v] == idx[v])
+                // este v radacina unei CTC?
+                print "O noua CTC: "
+                repeat
+                        u = pop(S)
+                        print u
+                until (u == v)

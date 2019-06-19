@@ -1,0 +1,35 @@
+Tema 1 Protocoale de Comunicare
+Nume: Stoica George-Ovidiu
+Grupa: 322 CA
+
+1. STRUCTURI:
+Pentru implementarea structurii Kermit am folosit pachetele kerm_pack si
+send_init definite in lib.h. Structura kerm_pack defineste pachetul generic
+ce contine toate atributele necesarii transmiterii pachetului(LEN, SEQ,
+DATA etc.) iar send_init este un pachet folosit pentru stocarea regulilor
+transmisiunii, transmise la primul contact al serverului cu clientul.
+Dupa formarea mesajului de tip kerm_pack acesta este copiat in msg.payload, 
+lungimea acestuia fiind copiata in msg.len.
+
+Numarul de secventa se incrementeaza cu macro-ul inc_seq.
+
+2. ALGORITM TRANSMITERE:
+    Senderul trimite mesajul initial si asteapta ACK sau NAK in functie de 
+corectitudinea transmiterii. Dupa ce primeste ACK incepe sa trimita fisierele
+dupa regulile definite in tema.
+Pentru transmiterea unui singur pachet, acesta este setat initial pe 0.
+Headerul este setat pe cel default, SEQ este incrementat, este setat TYPE, 
+DATA este setat in functie de tipul mesajului iar dupa ce toate atributele 
+au fost setate mai putin CHECK si MARK, se calculeaza suma de control si este
+setata in CHECK. LEN stocheaza lungimea campului DATA, pentru ca DATA nu are mai
+mult de 250 de Bytes.
+    Pentru retrimiterea mesajelor cu timeout, am folosit in sender functia
+send_until_correct(const msg *t) care retrimite mesajul la infinit daca nu
+primeste ACK sau daca primeste NAK.
+    Receiverul primeste mesajul, verifica suma de control, si trimite ACK sau
+NAK in functie de verificare. Dupa primul mesaj de setare a regulilor
+transmiterii, receiver-ul intra in loop infinit asteptand mesaje, scriind
+mesajele de tip DATA in fisierele deschise in urma trimiterii mesajelor de tip
+File_Header iar cand primeste un pachet cu tipul EOT, incheie transmiterea.
+
+

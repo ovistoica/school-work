@@ -1,0 +1,20 @@
+Pt. I
+1. genereaza cheie privata cu parola pe 1024
+2. pe baza cheii private o sa generam o cheie publica
+3. genereaza message digest semnat cu cheia privata de la 1.
+4. verificare message digest cu cheie publica
+5. Criptare a unui fisier
+6. Decriptarea fisierului
+
+Pt. II
+0. install libssl-dev
+1. init context(SSL_CTX)
+2. Incarcare fisier trust store. load trust store
+3. Realizare conexiunie. Conectare server( BIO *bio)
+=> connect(.."google.com:443");
+4. verificare certificat 
+5. comunicare => 2 metode:
+    *Bio_read(Bio*, buffer, len);
+    *Bio_write(Bio*, buffer, len);
+
+

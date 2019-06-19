@@ -1,0 +1,100 @@
+1.A)Enumerati functiile nivelului legatura de date
+  b)Explicati cum functioneaza transmiterea transparenta
+c)explicati de ce sunt necesare si cum se folosesc numerele de secventa si sumele de control
+d)descrieti principiul protocoalelor cu fereastra glisanta
+e)scrieti in pseudocod si explicati actiunile efectuate in cadrul unui protocol cu fereastra unitara la emitator
+-----Rezolvare-----
+1.a)Functiile nivelului legatura de date sunt:incadrarea,transmiterea trasnparenta,controlul eorilor,controlul fluxurilor,gestiunea legaturii.
+b)Cand are loc transmiterea transparenta,ca inceput si sfarsit de cadru avem  ETX  si STX.La inceput ETX,iar la sfarsit STX,astfel ne putem da 
+seama unde e inceput,sfarsitul,sau unde ne aflam,
+Pot aparea 2 mari probleme:
+La trimiterea datelor binare,datele pot contine aceasi secventa ce coincide cu ETX sau STX.
+Solutie:Folosim DLE ETX si DLE STX,si definim inceputul si sfarsitul.
+Orice este dupa DLE,diferit de ETX,STX  sau DLE inseamna ca este o eroare.
+Alta problema,este ca unele date sa contina flag fals de terminar.
+Solutie:La trimitere vom adauga un 0 dupa 5 biti consecutivi de 1,iar la primire vom elimina 0-ul care este dupa 5 biti consecutivi de 1.
+
+c)Numerele de secventa se folosesc pentru a nu primii duplicate.
+Un transmitator trimite catre receptor mai multe mesaje.
+Desi daca un pachet s-a trimis,confirmarea de primire se poate pierde si ea,astfel transmitatorul va trimite pachetul din nou.
+Cand pachetul soseste,verificam numerele de secventa si vedem daca este sau nu duplicat,Daca e duplicat nu il acceptam,altfel da.
+Sumele de control verifica integritatea pachetelor.
+Daca pachetele sunt modificate pe drum ,suma de control se modifica,asa ca ne putenm da seama daca un pachet e modificat sau nu
+dupa suma de control.
+
+d)Cand soseste un cadru cu date,in locul emiterii imediate a unui cadru de confirmare,receptorul sta si asteapta urmatorul pachet.Confirmarea 
+e transportata pe gratis de catre urmatorul cadru.
+Tehnica intarzierii confirmarii,astfel incat sa fie agatata de urmatorul cadru de date,se numeste piggybacking.
+Ca si avantaj,la acest tip de protocol,lungimea de banda este folosita mai eficient.
+Daca un pachet soseste mai repede,confirmarea este adaugata in el.
+Daca pana la sfarsitul periadei de timp nu a aparut un nou pachet,se trimite un cadru de confirmare separat.
+
+e)DACA GASITI SA IMI SPUNETI SI MIE,VA ROG MULT.
+
+
+2.a)Enumerati deficientele protocolului IPV4
+b)precizati cum rezolva IPV6 deficientele IPV4
+c)descrieti modul in care decurge fragmentarea in IPV4 si IPV6
+d)descrieti relatia intre protocoalele IPV4 si ICMP,prezicand la ce se foloseste ICMP
+-----Rezolvare-----
+2.a)Adrese insuficiente pentru a face fata cresterii numarului de dispozitive cu acces la INternet,antet complicat,
+nu suporta pachete de dimensiuni mari,are suport redus pentru IPsec si multicast.
+b)IPV6 rezolva problemele versiunii IPV4 deorecere are:Spatriu de adrese mult mai mare.suport simplificat pentru 
+multicast,suport pentru IPsec,antet eficient,Jumbograme adica pachete de pana la 4GB.
+c)La IPV4,când un pachet este prea mare pentru urmatoarea legatura peste care va trece, poate fi fragmentat de expeditor
+ (gazda sau ruter).
+Pentru IPv6, fragmentarea poate avea loc numai la nodul sursa, iar reasamblarea este facuta doar la nodul destinatie.
+Este folosit antetul extensiei de fragmentare.
+d)Protocolul ICMP(internet control message protocol) este utilizat in identificarea erorilor aparute in retele.
+ICMP foloseste IPV4 pentru transmisie ,iar IPV4 foloseste ICMP pentru raportarea de erori.
+
+
+
+
+3
+
+3.1a)Modul de organizare DNS
+b)Prezentati redundanta serverelor DNS si replicarea informatiilor DNS
+c)Cum se poate face securizarea DNS
+-----Rezolvare-----
+a)DNS face traducerea dintre nume simbolice si adrese ip.
+Pentru a stabili corespndenta dintre un nume si o adresa ip,programul de aplicatie apeleaza o procedura de biblioteca numita 
+resolver,transferandu-i numele ca parametru.
+Resolverul trimite un pachet UDP la serverul DNS local,care cauta numele si returneaza adresa IP catre rezolver,care o returneaza apelantului.
+b)Redundanta serverelor DNS:
+Roluri:
+	Primar:Pe el se fac toate modificarile inregistrarilor.
+               Colecteaza informatii despre una sau mai multe zone aflate in sistemul de fisiere
+	       Raspunde intrebarilor resolverelor
+        Secundar:Preia modificarile de la alte servere
+	         Asigura redundanta
+	Master files(sursa aplicarii):Fisiere text care contin inregistrari de resurse.
+
+c)Serviciului poate fi cu u?urin?a gre?it configurat astfel încât sa el devine fara voie un serviciu
+ DNS de tip openresolver. Solutia  este un fi?ier de configurare a serviciului DNS
+ (folosind BIND), ce poate fi utilizat de oricine dore?te sa securizeze serviciul de DNS oferit utilizatorilor sai.
+                                    
+
+
+
+
+3.2.a)Rolul si caracteristici HTTP
+b)descrieti structura cererilor si raspunsurilor HTTP
+c)descrieti headere-le pentru autorizare si autentificare
+-----Rezolvare-----
+a)HTPP(HyperText Transfer Protocol) este un protocol pentru transferul mesajelor specializate prin retea.
+Este un protocol stateless,adica trateaza cererile individual.
+Foloseste paradigma request-response.
+Clientul comunica direct sau prin proxyuri.
+b)Structura de mesaje(cere/raspuns):
+1.Linia de comanda/raspuns
+2.Linia de antet
+3.Corp mesaj
+c)Header-le pentru autorizare si autentificare
+Autorizare de baza:Prin antet de autorizare,nume si parola criptat trimise(base64)
+Secvente de actiuni:-Cere sursa restrictionata
+		    -Serverul raspunde cu 401
+                    -Navigatorul retrimite cererea cu antet sumplimentar de autorizare
+                    -Serverul verifica credentialele de autorizare si satisface cererea sau refuza cu cod 403
+                    -Navigatorul foloseste credentiale si in viitoarele cereri la URL dependente.
+4.Linia de
